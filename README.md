@@ -11,6 +11,9 @@ state after ten generations:
 python3 gol.py < pattern.life
 ```
 
+An example pattern file, `pattern.life`, is included in the repository and
+contains a small glider that can be used to try out the program.
+
 ## Tests
 
 Run the unit tests with:
