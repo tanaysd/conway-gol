@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Set, Tuple, Iterable
+from typing import Iterable, Set, Tuple
+
+import sys
 
 
 def parse_life(lines: Iterable[str]) -> Set[Tuple[int, int]]:
@@ -40,7 +42,7 @@ def evolve(live_cells: Set[Tuple[int, int]]) -> Set[Tuple[int, int]]:
 
 
 def main() -> None:
-    import sys
+    """Run the Game of Life for ten generations and print the result."""
 
     live_cells = parse_life(sys.stdin)
     for _ in range(10):
