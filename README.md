@@ -30,13 +30,14 @@ Coordinates must be handled as native Python integers but semantically treated a
 The algorithm must only simulate neighborhoods around currently live or potentially live cells to remain efficient.
 
 ## 🧱 Core Design Principles
-Principle	Description
-Sparse Representation	Live cells are stored in a Set[Tuple[int, int]]. This enables memory-efficient processing of sparse data over a massive space.
-Local Update Logic	Per generation, only the neighborhood of currently live cells is processed—ensuring runtime scales with active regions only.
-Deterministic & Stateless	Each generation is computed as a pure function of the previous state. No shared state or mutation across generations.
-Composable Kernel	Game logic is encapsulated in an evolve() function, making it reusable, testable, and modular.
-Minimal, Spec-Compliant I/O	Both input and output strictly follow the Life 1.06 specification, enabling use with external tools or datasets.
-64-bit Integer Compliance	Coordinates are treated as 64-bit signed values even though Python allows arbitrary precision, ensuring correctness and portability.
+| Principle                       | Description                                                                                                                          |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Sparse Representation**       | Live cells are stored in a `Set[Tuple[int, int]]`. This enables memory-efficient processing of sparse data over a massive space.     |
+| **Local Update Logic**          | Per generation, only the neighborhood of currently live cells is processed—ensuring runtime scales with active regions only.         |
+| **Deterministic & Stateless**   | Each generation is computed as a pure function of the previous state. No shared state or mutation across generations.                |
+| **Composable Kernel**           | Game logic is encapsulated in an `evolve()` function, making it reusable, testable, and modular.                                     |
+| **Minimal, Spec-Compliant I/O** | Both input and output strictly follow the Life 1.06 specification, enabling use with external tools or datasets.                     |
+| **64-bit Integer Compliance**   | Coordinates are treated as 64-bit signed values even though Python allows arbitrary precision, ensuring correctness and portability. |
 
 ## Running
 
