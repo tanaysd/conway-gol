@@ -7,11 +7,11 @@ Simulate 10 iterations of Conway's Game of Life, given an initial configuration 
 ## 📜 Rules of the Game
 The Game of Life is a cellular automaton devised by mathematician John Conway. It evolves based on simple local rules applied to a 2D grid of cells, each of which is either alive or dead:
 
-Survival: A live cell with 2 or 3 live neighbors stays alive.
+**Survival**: A live cell with 2 or 3 live neighbors stays alive.
 
-Death by underpopulation or overpopulation: A live cell with fewer than 2 or more than 3 neighbors dies.
+**Death** by underpopulation or overpopulation: A live cell with fewer than 2 or more than 3 neighbors dies.
 
-Birth: A dead cell with exactly 3 live neighbors becomes alive.
+**Birth**: A dead cell with exactly 3 live neighbors becomes alive.
 
 The 8 surrounding positions around a cell constitute its Moore neighborhood.
 
@@ -23,11 +23,9 @@ Coordinates can span the full signed 64-bit integer range:
 The grid is conceptually infinite and extremely sparse.
 
 ⚠️ Constraints
-The simulation cannot use a 2D array or matrix.
-
-Coordinates must be handled as native Python integers but semantically treated as 64-bit safe.
-
-The algorithm must only simulate neighborhoods around currently live or potentially live cells to remain efficient.
+- The simulation cannot use a 2D array or matrix.
+- Coordinates must be handled as native Python integers but semantically treated as 64-bit safe.
+- The algorithm must only simulate neighborhoods around currently live or potentially live cells to remain efficient.
 
 ## 🧱 Core Design Principles
 | Principle                       | Description                                                                                                                          |
