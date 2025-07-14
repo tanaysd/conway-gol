@@ -6,7 +6,7 @@ from typing import Set, Tuple
 
 Coord = Tuple[int, int]
 
-def parse_input() -> Set[Coord]:
+def parse_life() -> Set[Coord]:
     """Parse Life 1.06 format input from stdin.
 
     Returns:
