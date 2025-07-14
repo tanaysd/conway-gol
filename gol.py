@@ -96,7 +96,7 @@ def main() -> None:
     for idx in range(10):
         live_cells = evolve(live_cells)
         print(f"Gen {idx+1}")
-        render_ascii(live_cells)
+        render_ascii_with_axes(live_cells)
     print_output(live_cells)
 
 if __name__ == "__main__":
