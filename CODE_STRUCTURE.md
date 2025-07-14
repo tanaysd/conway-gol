@@ -12,7 +12,7 @@ This document outlines the structure of the `gol.py` implementation for Conway's
   - Writes output in Life 1.06 format
 - `test_gol.py` *(optional)*: Unit tests using the `unittest` framework.
 - `examples/`: Sample `.life` files for reference and validation.
-- `glider_diff_log.md`: Visual + tabular step-by-step trace of a glider pattern.
+- `glider_diff_log.md`: Visual + tabular step-by-step trace of a glider pattern. #TODO
 
 ---
 
