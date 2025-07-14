@@ -56,8 +56,7 @@ python3 gol.py < examples/glider.life --ascii
 python3 gol.py < examples/glider.life --ascii --steps 15
 ```
 
-An example pattern file, `pattern.life`, is included in the repository and
-contains a small glider that can be used to try out the program.
+examples are available in `examples` folder
 
 ## Tests
 
