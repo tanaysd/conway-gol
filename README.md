@@ -60,12 +60,12 @@ python3 -m unittest discover -v
 
 The following artifacts are recommended to ensure the project is self-explanatory, review-ready, and reproducible. This suite of documents supports contributors, maintainers, and reviewers.
 
-| Addition | Purpose |
-| -------- | ------- |
-| README.md | Project overview, usage, and objectives |
-| CODE_STRUCTURE.md | High-level summary of code organization|
-| Inline docstrings | Self-documenting code for core functions|
-| examples/ folder | Sample input/output pairs for reference|
-| TEST_PLAN.md | Test cases, edge scenarios, strategy|
-| REVIEW_GUIDE.md (optional) | Reviewer checklist and evaluation focus|
-| ELI5.md | Conceptual introduction via analogy|
+| Addition                        | Purpose                                                                                                                              |
+| --------                        | ------------------------------------------------------------------------------------------------------------------------------------ |
+| README.md                        | Project overview, usage, and objectives |
+| CODE_STRUCTURE.md                        | High-level summary of code organization|
+| Inline docstrings                        | Self-documenting code for core functions|
+| examples/ folder                        | Sample input/output pairs for reference|
+| TEST_PLAN.md                        | Test cases, edge scenarios, strategy|
+| REVIEW_GUIDE.md (optional)                        | Reviewer checklist and evaluation focus|
+| ELI5.md                        | Conceptual introduction via analogy|
