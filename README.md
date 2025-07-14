@@ -43,7 +43,16 @@ The program expects Life 1.06 formatted input on `stdin` and prints the
 state after ten generations:
 
 ```bash
+python3 gol.py < examples/glider.life
+```
+
+```bash
+# to generate visualization
 python3 gol.py < examples/glider.life --ascii
+```
+
+```bash
+# for n generations
 python3 gol.py < examples/glider.life --ascii --steps 15
 ```
 
