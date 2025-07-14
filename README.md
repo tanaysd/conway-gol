@@ -43,7 +43,8 @@ The program expects Life 1.06 formatted input on `stdin` and prints the
 state after ten generations:
 
 ```bash
-python3 gol.py < pattern.life
+python3 gol.py < examples/glider.life --ascii
+python3 gol.py < examples/glider.life --ascii --steps 15
 ```
 
 An example pattern file, `pattern.life`, is included in the repository and
