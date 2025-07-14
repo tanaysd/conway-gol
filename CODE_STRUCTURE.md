@@ -38,16 +38,7 @@ Prints the final state of the board in Life 1.06 format to `stdout`.
 
 ## 🔄 Control Flow
 
-stdin
-↓
-parse_input()
-↓
-10 × evolve()
-↓
-print_output()
-↓
-stdout
-
+stdin --> parse_input() --> 10 × evolve() --> print_output() --> stdout
 
 ---
 
