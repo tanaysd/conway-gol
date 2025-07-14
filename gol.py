@@ -76,7 +76,7 @@ def main() -> None:
     live_cells = parse_life()
     for idx in range(10):
         live_cells = evolve(live_cells)
-        print(f"Gen {i+1}")
+        print(f"Gen {idx+1}")
         render_ascii(live_cells)
     print_output(live_cells)
 
