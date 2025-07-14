@@ -43,19 +43,29 @@ def evolve(live_cells: Set[Coord]) -> Set[Coord]:
         if count == 3 or (count == 2 and cell in live_cells)
     }
 
-def render_ascii(cells, pad=1):
+def render_ascii(cells: set[tuple[int, int]], pad: int = 1) -> None:
+    """
+    Renders the Game of Life grid as ASCII, aligned with Life 1.06 (x, y) convention.
+    Origin (0, 0) is bottom-left. Y increases upward.
+
+    Args:
+        cells: Set of (x, y) live cell coordinates.
+        pad: Number of empty cells to pad around the bounding box.
+    """
     if not cells:
         print("(empty)")
         return
+
     xs, ys = zip(*cells)
     min_x, max_x = min(xs), max(xs)
     min_y, max_y = min(ys), max(ys)
 
-    for y in range(min_y - pad, max_y + pad + 1):
+    for y in reversed(range(min_y - pad, max_y + pad + 1)):
         row = ''
         for x in range(min_x - pad, max_x + pad + 1):
             row += '*' if (x, y) in cells else '·'
         print(row)
+
 
 def print_output(live_cells: Set[Coord]) -> None:
     """Print the current state of live cells in Life 1.06 format to stdout.
