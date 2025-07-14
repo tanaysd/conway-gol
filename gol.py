@@ -92,12 +92,22 @@ def main() -> None:
     Reads Life 1.06 input from stdin, applies 10 iterations of Conway's rules,
     and prints the final state to stdout.
     """
+    parser = argparse.ArgumentParser(description="Conway's Game of Life")
+    parser.add_argument('--ascii', action='store_true', help='Render each generation as ASCII')
+    parser.add_argument('--steps', type=int, default=10, help='Number of generations to evolve')
+    args = parser.parse_args()
+
     live_cells = parse_life()
-    for idx in range(10):
+
+    for i in range(args.steps):
         live_cells = evolve(live_cells)
-        print(f"Gen {idx+1}")
-        render_ascii_with_axes(live_cells)
-    print_output(live_cells)
+        if args.ascii:
+            print(f"\n🧬 Generation {i+1}")
+            render_ascii_with_axes(live_cells)
+
+    print("#Life 1.06")
+    for x, y in sorted(live_cells):
+        print(f"{x} {y}")
 
 if __name__ == "__main__":
     main()
