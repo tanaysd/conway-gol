@@ -43,6 +43,20 @@ def evolve(live_cells: Set[Coord]) -> Set[Coord]:
         if count == 3 or (count == 2 and cell in live_cells)
     }
 
+def render_ascii(cells, pad=1):
+    if not cells:
+        print("(empty)")
+        return
+    xs, ys = zip(*cells)
+    min_x, max_x = min(xs), max(xs)
+    min_y, max_y = min(ys), max(ys)
+
+    for y in range(min_y - pad, max_y + pad + 1):
+        row = ''
+        for x in range(min_x - pad, max_x + pad + 1):
+            row += '█' if (x, y) in cells else '·'
+        print(row)
+
 def print_output(live_cells: Set[Coord]) -> None:
     """Print the current state of live cells in Life 1.06 format to stdout.
 
@@ -60,8 +74,10 @@ def main() -> None:
     and prints the final state to stdout.
     """
     live_cells = parse_life()
-    for _ in range(10):
+    for idx in range(10):
         live_cells = evolve(live_cells)
+        print(f"Gen {i+1}")
+        render_ascii(live_cells)
     print_output(live_cells)
 
 if __name__ == "__main__":
