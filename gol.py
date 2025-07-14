@@ -38,12 +38,10 @@ def evolve(live_cells: Set[Coord]) -> Set[Coord]:
                 if dx != 0 or dy != 0:
                     neighbor_counts[(x + dx, y + dy)] += 1
 
-    next_gen = set()
-    for cell, count in neighbor_counts.items():
-        if count == 3 or (count == 2 and cell in live_cells):
-            next_gen.add(cell)
-
-    return next_gen
+    return {
+        cell for cell, count in neighbor_counts.items()
+        if count == 3 or (count == 2 and cell in live_cells)
+    }
 
 def print_output(live_cells: Set[Coord]) -> None:
     """Print the current state of live cells in Life 1.06 format to stdout.
@@ -61,7 +59,7 @@ def main() -> None:
     Reads Life 1.06 input from stdin, applies 10 iterations of Conway's rules,
     and prints the final state to stdout.
     """
-    live_cells = parse_input()
+    live_cells = parse_life()
     for _ in range(10):
         live_cells = evolve(live_cells)
     print_output(live_cells)
