@@ -54,7 +54,7 @@ def render_ascii(cells, pad=1):
     for y in range(min_y - pad, max_y + pad + 1):
         row = ''
         for x in range(min_x - pad, max_x + pad + 1):
-            row += '█' if (x, y) in cells else '·'
+            row += '*' if (x, y) in cells else '·'
         print(row)
 
 def print_output(live_cells: Set[Coord]) -> None:
