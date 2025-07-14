@@ -28,14 +28,14 @@ The grid is conceptually infinite and extremely sparse.
 - The algorithm must only simulate neighborhoods around currently live or potentially live cells to remain efficient.
 
 ## 🧱 Core Design Principles
-| Principle                       | Description                                                                                                                          |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| **Sparse Representation**       | Live cells are stored in a `Set[Tuple[int, int]]`. This enables memory-efficient processing of sparse data over a massive space.     |
-| **Local Update Logic**          | Per generation, only the neighborhood of currently live cells is processed—ensuring runtime scales with active regions only.         |
-| **Deterministic & Stateless**   | Each generation is computed as a pure function of the previous state. No shared state or mutation across generations.                |
-| **Composable Kernel**           | Game logic is encapsulated in an `evolve()` function, making it reusable, testable, and modular.                                     |
-| **Minimal, Spec-Compliant I/O** | Both input and output strictly follow the Life 1.06 specification, enabling use with external tools or datasets.                     |
-| **64-bit Integer Compliance**   | Coordinates are treated as 64-bit signed values even though Python allows arbitrary precision, ensuring correctness and portability. |
+| Principle                     | Description |
+| ----------------------------- | --------------------------------------------------------------- |
+| **Sparse Representation**     | Store live cells in a `set` of `(x, y)` tuples. |
+| **Local Update Logic**        | Examine neighborhoods only around live cells. |
+| **Deterministic & Stateless** | Each generation depends solely on the previous grid state. |
+| **Composable Kernel**         | Encapsulate rules in an `evolve()` function. |
+| **Minimal, Spec-Compliant I/O** | I/O follows the Life 1.06 spec. |
+| **64-bit Integer Compliance** | Coordinates treated as 64‑bit signed values. |
 
 ## Running
 
@@ -60,12 +60,12 @@ python3 -m unittest discover -v
 
 The following artifacts are recommended to ensure the project is self-explanatory, review-ready, and reproducible. This suite of documents supports contributors, maintainers, and reviewers.
 
-| Addition                        | Purpose                                                                                                                              |
-| --------                        | ------------------------------------------------------------------------------------------------------------------------------------ |
-| README.md                        | Project overview, usage, and objectives |
-| CODE_STRUCTURE.md                        | High-level summary of code organization|
-| Inline docstrings                        | Self-documenting code for core functions|
-| examples/ folder                        | Sample input/output pairs for reference|
-| TEST_PLAN.md                        | Test cases, edge scenarios, strategy|
-| REVIEW_GUIDE.md (optional)                        | Reviewer checklist and evaluation focus|
-| ELI5.md                        | Conceptual introduction via analogy|
+| Addition               | Purpose|
+| ---------------------- | -----------------------------------------------------|
+| README.md              | Project overview, usage, and objectives.|
+| CODE_STRUCTURE.md      | High-level summary of code organization.|
+| Inline docstrings      | Self-documenting core functions.|
+| examples/ folder       | Sample input and output references.|
+| TEST_PLAN.md           | Test cases and strategy.|
+| REVIEW_GUIDE.md (opt.) | Reviewer checklist and evaluation focus.|
+| ELI5.md                | Conceptual introduction via analogy.|
