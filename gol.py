@@ -72,7 +72,7 @@ def render_ascii_with_axes(cells: set[tuple[int, int]], pad: int = 1) -> None:
     for y in reversed(y_range):
         row = f'{y:3} |'
         for x in x_range:
-            row += ' * ' if (x, y) in cells else ' · '
+            row += ' @ ' if (x, y) in cells else ' · '
         print(row)
 
     print()  # trailing newline
