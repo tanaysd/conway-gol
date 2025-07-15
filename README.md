@@ -1,4 +1,4 @@
-# Conway's Game of Life
+# 🧬 Conway's Game of Life
 
 This is a Python-based simulator for Conway's Game of Life. It is designed to be simple, efficient, and capable of handling very large patterns on a conceptually infinite grid.
 
