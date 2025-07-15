@@ -24,10 +24,10 @@ This guide is intended to help two distinct audiences navigate and evaluate the 
 
 ### ✅ Review Checklist
 
+* [ ] [Use demo notebook to run code](https://colab.research.google.com/github/tanaysd/conway-gol/blob/main/conway_gol_nb.ipynb)
 * [ ] Run `test_gol.py` and validate all tests pass
-* [ ] Read `glider_diff_log.md` and verify state transitions align
 * [ ] Manually inspect `gol.py` for type safety and deterministic logic
-* [ ] Try running an example: `python3 gol.py < examples/glider.life`
+* [ ] Try running an example: `python3 gol.py examples/glider.life`
 * [ ] Confirm `examples/` output matches known pattern behaviors
 
 ---
@@ -46,7 +46,7 @@ cd conway-gol
 2. Run a sample simulation:
 
 ```bash
-python3 gol.py < examples/glider.life
+python3 gol.py examples/glider.life
 ```
 
 3. Modify or create your own `.life` file:
