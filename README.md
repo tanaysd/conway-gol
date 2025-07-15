@@ -1,87 +1,74 @@
-## 🧬 Conway’s Game of Life — 64-bit Infinite Grid (Life 1.06)
-This repository contains a sparse, high-performance implementation of Conway’s Game of Life that operates over an unbounded 2D space of 64-bit signed integer coordinates. The simulator is compliant with the Life 1.06 file format, and supports arbitrary large or negative coordinates without assuming any grid bounds.
+# Conway's Game of Life
 
-## 🎯 Objective
-Simulate 10 iterations of Conway's Game of Life, given an initial configuration of live cells as input in Life 1.06 format. The program reads from standard input, processes the evolution, and writes the final state (after 10 generations) to standard output—again in Life 1.06 format.
+This is a Python-based simulator for Conway's Game of Life. It is designed to be simple, efficient, and capable of handling very large patterns on a conceptually infinite grid.
 
-## 📜 Rules of the Game
-The Game of Life is a cellular automaton devised by mathematician John Conway. It evolves based on simple local rules applied to a 2D grid of cells, each of which is either alive or dead:
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tanaysd/conway-gol/blob/main/conway_gol_nb.ipynb) for an easy to use demo without any local install
 
-**Survival**: A live cell with 2 or 3 live neighbors stays alive.
+---
 
-**Death** by underpopulation or overpopulation: A live cell with fewer than 2 or more than 3 neighbors dies.
+## 📂 Project Documentation
 
-**Birth**: A dead cell with exactly 3 live neighbors becomes alive.
+This project is extensively documented to help users, reviewers, and contributors.
 
-The 8 surrounding positions around a cell constitute its Moore neighborhood.
+* **[ELI5.md](ELI5.md)**: A simple, non-technical introduction to the Game of Life.
+* **[CODE_STRUCTURE.md](CODE_STRUCTURE.md)**: A high-level overview of the Python code.
+* **[TEST_PLAN.md](tests/TEST_PLAN.md)**: Describes the testing strategy and test cases.
+* **[REVIEW_GUIDE.md](REVIEW_GUIDE.md)**: A guide for those who want to review or contribute to the project.
 
-## 🧠 Design Considerations
-📏 Infinite Space (64-bit Integers)
-Coordinates can span the full signed 64-bit integer range:
-[-2⁶³, 2⁶³ - 1]
+---
 
-The grid is conceptually infinite and extremely sparse.
+## 🤔 What is Conway's Game of Life?
 
-⚠️ Constraints
-- The simulation cannot use a 2D array or matrix.
-- Coordinates must be handled as native Python integers but semantically treated as 64-bit safe.
-- The algorithm must only simulate neighborhoods around currently live or potentially live cells to remain efficient.
+For a simple and fun introduction to the concept, check out our **[ELI5 (Explain Like I'm 5) guide](ELI5.md)**.
 
-## 🧱 Core Design Principles
-| Principle                     | Description |
-| ----------------------------- | --------------------------------------------------------------- |
-| **Sparse Representation**     | Store live cells in a `set` of `(x, y)` tuples. |
-| **Local Update Logic**        | Examine neighborhoods only around live cells. |
-| **Deterministic & Stateless** | Each generation depends solely on the previous grid state. |
-| **Composable Kernel**         | Encapsulate rules in an `evolve()` function. |
-| **Minimal, Spec-Compliant I/O** | I/O follows the Life 1.06 spec. |
-| **64-bit Integer Compliance** | Coordinates treated as 64‑bit signed values. |
+---
 
-## Running
+## 룰 The Rules of the Game
 
-The program expects Life 1.06 formatted input on `stdin` and prints the
-state after ten generations:
+The universe of the Game of Life is an infinite, two-dimensional grid of square *cells*, each of which is in one of two possible states, *live* or *dead*. Every cell interacts with its eight *neighbours*, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:
 
-**Demo**, run the code in Google Colab --> [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tanaysd/conway-gol/blob/main/conway_gol_nb.ipynb)
+1.  **Underpopulation**: Any live cell with fewer than two live neighbours dies.
+2.  **Survival**: Any live cell with two or three live neighbours lives on to the next generation.
+3.  **Overpopulation**: Any live cell with more than three live neighbours dies.
+4.  **Reproduction**: Any dead cell with exactly three live neighbours becomes a live cell.
 
-### run from command line, after cloning to repo to local
-```bash
-python3 gol.py < examples/glider.life
-```
+---
 
-```bash
-# to generate visualization
-python3 gol.py < examples/glider.life --ascii
-```
+## 🧠 How It Works
+
+This simulator is designed to be highly efficient by avoiding the creation of a large, 2D grid in memory. Here are the core principles:
+
+* **Sparse Representation**: We only keep track of the coordinates of live cells in a Python `set`.
+* **Localized Simulation**: The simulation only considers the neighbors of currently live cells, making it fast even on a conceptually infinite grid.
+* **64-bit Coordinates**: The program can handle extremely large coordinate values, allowing for vast patterns.
+
+For a deeper dive into the code, see the **[CODE_STRUCTURE.md](CODE_STRUCTURE.md)**.
+
+---
+
+## 🚀 Running the Simulator
+
+You can run the simulator from the command line.
+
+**To run a simulation from a file:**
 
 ```bash
-# for n generations
-python3 gol.py < examples/glider.life --ascii --steps 15
+python gol.py --input examples/glider.life --ascii
 ```
 ```bash
-# with file input -- to run from a jupyter notebook
-python3 gol.py examples/glider.life
+python gol.py --input examples/glider.life --generations 100
 ```
-
-examples are available in `examples` folder
-
-## Tests
-
-Run the unit tests with:
-
 ```bash
-python3 -m unittest discover -v
+python gol.py --help
 ```
-## 📂 Project Documentation Structure
 
-The following artifacts are recommended to ensure the project is self-explanatory, review-ready, and reproducible. This suite of documents supports contributors, maintainers, and reviewers.
+### Examples
 
-| Addition               | Purpose|
-| ---------------------- | -----------------------------------------------------|
-| README.md              | Project overview, usage, and objectives.|
-| CODE_STRUCTURE.md      | High-level summary of code organization.|
-| Inline docstrings      | Self-documenting core functions.|
-| examples/ folder       | Sample input and output references.|
-| TEST_PLAN.md           | Test cases and strategy.|
-| REVIEW_GUIDE.md (opt.) | Reviewer checklist and evaluation focus.|
-| ELI5.md                | Conceptual introduction via analogy.|
+The `examples` folder contains several interesting patterns to get you started:
+
+* `glider.life`: A classic pattern that moves across the grid.
+* `block.life`: A stable, non-changing pattern.
+* `blinker.life`: A simple oscillator.
+* `diehard.life`: A pattern that runs for 130 generations before disappearing.
+
+You can find more details in the `examples/README.md`.
