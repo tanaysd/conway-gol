@@ -2,7 +2,7 @@
 
 This is a Python-based simulator for Conway's Game of Life. It is designed to be simple, efficient, and capable of handling very large patterns on a conceptually infinite grid.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/google/generative-ai-docs/blob/main/site/en/tutorials/python_quickstart.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/google/generative-ai-docs/blob/main/site/en/tutorials/python_quickstart.ipynb) for an easy to use demo without any local install
 
 ---
 
