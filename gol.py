@@ -3,18 +3,21 @@
 from collections import Counter
 import sys
 import argparse
-from typing import Set, Tuple
+from typing import Set, Tuple, TextIO
 
 Coord = Tuple[int, int]
 
-def parse_life() -> Set[Coord]:
-    """Parse Life 1.06 format input from stdin.
+def parse_life(input_stream: TextIO) -> Set[Coord]:
+    """Parse Life 1.06 format input from a given stream.
+
+    Args:
+        input_stream (TextIO): The stream to read from (e.g., sys.stdin or a file).
 
     Returns:
         Set[Tuple[int, int]]: Set of live cell coordinates parsed from input.
     """
     live_cells = set()
-    for line in sys.stdin:
+    for line in input_stream:
         line = line.strip()
         if not line or line.startswith("#"):
             continue
@@ -61,11 +64,9 @@ def render_ascii_with_axes(cells: set[tuple[int, int]], pad: int = 1) -> None:
     min_x, max_x = min(xs), max(xs)
     min_y, max_y = min(ys), max(ys)
 
-    # Prepare grid width
     x_range = range(min_x - pad, max_x + pad + 1)
     y_range = range(min_y - pad, max_y + pad + 1)
 
-    # X-axis labels
     x_axis = '     ' + ''.join(f'{x:3}' for x in x_range)
     print(x_axis)
 
@@ -75,7 +76,7 @@ def render_ascii_with_axes(cells: set[tuple[int, int]], pad: int = 1) -> None:
             row += ' @ ' if (x, y) in cells else ' · '
         print(row)
 
-    print()  # trailing newline
+    print()
 
 def print_output(live_cells: Set[Coord]) -> None:
     """Print the current state of live cells in Life 1.06 format to stdout.
@@ -88,27 +89,49 @@ def print_output(live_cells: Set[Coord]) -> None:
         print(f"{x} {y}")
 
 def main() -> None:
-    """Run the Game of Life simulation for 10 generations.
-
-    Reads Life 1.06 input from stdin, applies 10 iterations of Conway's rules,
-    and prints the final state to stdout.
-    """
-    parser = argparse.ArgumentParser(description="Conway's Game of Life")
-    parser.add_argument('--ascii', action='store_true', help='Render each generation as ASCII')
-    parser.add_argument('--steps', type=int, default=10, help='Number of generations to evolve')
+    """Run the Game of Life simulation."""
+    parser = argparse.ArgumentParser(
+        description="Conway's Game of Life Simulator.",
+        formatter_class=argparse.RawTextHelpFormatter
+    )
+    parser.add_argument(
+        'input_file',
+        nargs='?',
+        type=argparse.FileType('r'),
+        default=sys.stdin,
+        help='Path to the input file (e.g., examples/glider.life).\n'
+             'If not provided, reads from standard input.'
+    )
+    parser.add_argument(
+        '--ascii',
+        action='store_true',
+        help='Render each generation as ASCII art.'
+    )
+    parser.add_argument(
+        '--steps',
+        type=int,
+        default=10,
+        help='Number of generations to evolve (default: 10).'
+    )
     args = parser.parse_args()
 
-    live_cells = parse_life()
+    # The argparse.FileType handles opening the file or using stdin.
+    # We just need to ensure the stream is closed if it's a file.
+    with args.input_file as stream:
+        live_cells = parse_life(stream)
 
     for i in range(args.steps):
-        live_cells = evolve(live_cells)
         if args.ascii:
-            print(f"\n🧬 Generation {i+1}")
+            print(f"\n🧬 Generation {i}")
             render_ascii_with_axes(live_cells)
+        live_cells = evolve(live_cells)
 
-    print("#Life 1.06")
-    for x, y in sorted(live_cells):
-        print(f"{x} {y}")
+    if args.ascii:
+        print(f"\n🧬 Final Generation ({args.steps})")
+        render_ascii_with_axes(live_cells)
+    
+    # Print the final state in Life 1.06 format
+    print_output(live_cells)
 
 if __name__ == "__main__":
     main()
