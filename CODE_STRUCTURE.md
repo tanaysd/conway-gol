@@ -7,45 +7,51 @@ This document outlines the structure of the `gol.py` implementation for Conway's
 ## 📂 File Overview
 
 - `gol.py`: Main execution script.
-  - Handles input parsing (Life 1.06 format)
-  - Executes 10 iterations of Game of Life logic
-  - Writes output in Life 1.06 format
+  - Handles input parsing (Life 1.06 format) via `parse_life()`
+  - Executes a configurable number of generations (default 10)
+  - Optionally renders each generation as ASCII art
+  - Writes final board state in Life 1.06 format
 - `test_gol.py` *(optional)*: Unit tests using the `unittest` framework.
 - `examples/`: Sample `.life` files for reference and validation.
-- `glider_diff_log.md`: Visual + tabular step-by-step trace of a glider pattern. #TODO
 
 ---
 
 ## 🔧 Key Functions (in `gol.py`)
 
-### `parse_input() -> Set[Tuple[int, int]]`
-Parses Life 1.06 format from `stdin` into a set of live cell coordinates.
+### `parse_life(input_stream: TextIO) -> Set[Tuple[int, int]]`
+Parses Life 1.06 formatted data from any text stream into a set of live cell coordinates.
 
 ### `evolve(live_cells: Set[Tuple[int, int]]) -> Set[Tuple[int, int]]`
 Applies Conway's rules to the current generation and returns the new generation.
 - Operates only on live cells and their neighbors.
 - Uses `collections.Counter` for neighbor counting.
 
+### `render_ascii_with_axes(cells: Set[Tuple[int, int]], pad: int = 1)`
+Renders the grid to the terminal with labeled axes when the `--ascii` option is enabled.
+
 ### `print_output(live_cells: Set[Tuple[int, int]])`
 Prints the final state of the board in Life 1.06 format to `stdout`.
 
 ### `main()`
-- Invokes input parser
-- Runs evolution loop 10 times
-- Outputs final board state
+- Parses command-line arguments
+- Reads input via `parse_life()`
+- Evolves the pattern for the requested number of steps
+- Optionally displays each generation in ASCII
+- Outputs the final board state
 
 ---
 
 ## 🔄 Control Flow
 
-stdin --> parse_input() --> 10 × evolve() --> print_output() --> stdout
+input stream/file --> parse_life() --> [evolve() repeated for N steps] --> optional ASCII --> print_output() --> stdout
 
 ---
 
 ## 📦 Data Structures
 
-- `Set[Tuple[int, int]]`: To store current live cells.
-- `Counter[Tuple[int, int]]`: To count neighbors per cell across the grid.
+- `Coord = Tuple[int, int]`: Type alias for board coordinates.
+- `Set[Coord]`: To store current live cells.
+- `Counter[Coord]`: To count neighbors per cell across the grid.
 
 ---
 
