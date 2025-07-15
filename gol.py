@@ -129,7 +129,7 @@ def main() -> None:
     if args.ascii:
         print(f"\n🧬 Final Generation ({args.steps})")
         render_ascii_with_axes(live_cells)
-        
+
     # Print the final state in Life 1.06 format
     print_output(live_cells)
 
