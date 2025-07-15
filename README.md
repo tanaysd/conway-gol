@@ -42,7 +42,7 @@ The grid is conceptually infinite and extremely sparse.
 The program expects Life 1.06 formatted input on `stdin` and prints the
 state after ten generations:
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tanaysd/conway-gol/blob/main/conway_gol_nb.ipynb)
+Demo, run the code in Google Colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tanaysd/conway-gol/blob/main/conway_gol_nb.ipynb)
 
 ```bash
 python3 gol.py < examples/glider.life
