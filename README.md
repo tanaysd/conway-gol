@@ -55,6 +55,10 @@ python3 gol.py < examples/glider.life --ascii
 # for n generations
 python3 gol.py < examples/glider.life --ascii --steps 15
 ```
+```bash
+# with file input -- to run from a jupyter notebook
+python3 gol.py examples/glider.life
+```
 
 examples are available in `examples` folder
 
